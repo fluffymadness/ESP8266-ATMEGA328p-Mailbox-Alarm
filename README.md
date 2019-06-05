@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is a WIP. The code still needs some cleanup and the recommended parts, microcontrollers, types of battery etc could still change later on.
+This project is WIP. The code still needs some cleanup and the recommended parts, microcontrollers, the type of battery etc could still change later on.
 
 The goal is to have a client and a server node for receiving status information
 from my physical mailbox outside.
