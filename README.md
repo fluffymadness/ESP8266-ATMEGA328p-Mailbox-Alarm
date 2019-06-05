@@ -20,7 +20,7 @@ Resetting the state, e.g when the mail was fetched should then be possible via w
 
 ## Screenshots
 
-
+![alt text](https://raw.githubusercontent.com/fluffymadness/ESP8266-ATMEGA328p-Mailbox-Alarm/master/info.jpg)
 
 # Already Implemented Functionality
 
