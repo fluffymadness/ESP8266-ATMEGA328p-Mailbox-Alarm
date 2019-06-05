@@ -40,6 +40,10 @@ The rest are standard parts that can also be sourced from aliexpress
 ![Alt text](system.jpg?raw=true "System")
 ![Alt text](info.jpg?raw=true "Info")
 
+## Screenshots showing the serial debug interface
+
+![Alt text](serialdebug.jpg?raw=true "Info")
+
 # Already Implemented Functionality
 
 ## Server
