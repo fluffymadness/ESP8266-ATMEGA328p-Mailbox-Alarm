@@ -14,7 +14,7 @@ To realize this, the mcu has to be in deep sleep mode all the time and should on
 After waking up from deepsleep the signal should be transmitted instantly to the server node indicating that the mailbox has been opened.
 
 The server node consists of an esp8266 with a led and has a nrf24l01 attached to it.
-When the the server realizes that the mailbox has been opened it should deliver a message via mqtt to an attached home automation system (e.g Domoticz or Homeassistant).
+When the the server realizes that the mailbox has been opened it should deliver a message via MQTT to an attached home automation system (e.g Domoticz or Homeassistant).
 Also the status of the Info-Page on the webinterface should update accordingly.
 
 Resetting the actual state, e.g when the mail was fetched should then be possible via the webinterface, mqtt commands, or a simple button press on the server node.
