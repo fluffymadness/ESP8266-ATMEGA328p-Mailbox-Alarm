@@ -4,7 +4,7 @@
 
 This is one of my work in progress personal projects.
 The goal is to have a client and a server node for sending and receiving status
-of my mailbox outside.
+of my physical mailbox outside.
 
 The client node consists of an atmega328 microcontroller, a a nordic semi conductor 2.4ghz transceiver (nrf24l01) and a magnetic reed switch.
 The Atmega should be running at a reduced clockrate and be driven by a coincell (CRC2032 3V) to last several months.
