@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href='https://fonts.googleapis.com/css?family=Archivo Narrow' rel='stylesheet'>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="description" content="ESP8266">
+	<meta name="author" content="fluffymadness">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="./script.js"></script>
+</head>
+<body> 
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	  <a class="navbar-brand" id="menutitle" href="index.html"></a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarText">
+		<ul class="navbar-nav mr-auto">
+		  <li class="nav-item">
+			<a id="nav-status" class="nav-link" href="index.html">Status</a>
+		  </li>
+		  <li class="nav-item">
+			<a id="nav-config" class="nav-link" href="config.html">Config</a>
+		  </li>
+		  <li class="nav-item active">
+			<a id="nav-update" class="nav-link" href="system.html">System</a>
+		  </li>
+		  <li class="nav-item">
+			<a id="nav-update" class="nav-link" href="info.html">Info</a>
+		  </li>
+		</ul>
+	  </div>
+	</nav>
+	<div class="container mt-3 mb-3">
+		<h3>Update Firmware and Spiff</h3>
+		<br>
+		<div class="text-left" style="margin-left:auto; margin-right:auto; display:inline-block">
+			<form id="uploadFirmwareForm">
+				<div class="form-group">
+					<input type='file' name='updateFirmwareFile' id='updateFirmwareFile'>
+					<input type='submit' id='updateFirmwareButton' value='UpdateFirmware'>
+				</div>
+			</form>
+			<form id="uploadSPIFFForm">
+				<div class="form-group">
+					<input type='file' name='uploadSPIFF' id='uploadSPIFF'>
+					<input type='submit' id='uploadSPIFFButton' value='UploadSPIFF'>
+				</div>
+			</form>
+			<form id="uploadFileForm">
+				<div class="form-group">
+					<input type="file" name='uploadFile' id='uploadFile'>
+					<input type='submit' id='uploadFileButton' value='UploadFile'>
+				</div>
+			</form>
+			<div id="response"></div>
+		</div>
+		<br>
+		<br>
+		<h3>Maintenence</h3>
+		<button type="button" class="btn btn-success" id="rebootbutton">Reboot</button>
+		<button type="button" class="btn btn-warning" id="resetwifibutton">Reset Wifi Settings</button>
+		<button type="button" class="btn btn-danger" id="resetconfigbutton">Reset Config</button>	
+		<br>
+		<br>
+		<div id="response2"></div>	
+	</div>
+	<script>
+		$(document).ready(function() {
+			getHostname();
+		});
+		//form Submit
+		
+		$("#updateFirmwareButton").on('click', function(evt){	 
+			evt.preventDefault();
+			var fd = new FormData();	
+			var file = $('#updateFirmwareFile')[0].files[0];
+			fd.append("fileToUpload",file);
+			$("#response").html("<img src='ajax-loader.gif'>");  
+			$.ajax({
+			   url: "update",
+			   type: "POST",
+			   data: fd,
+			   processData: false,
+			   contentType: false,
+			   success: function(response) {
+				   $("#response").html(response);
+				   setTimeout(function(){
+						$("#response").html("");
+				   }, 4000);
+			   },
+			   error: function(jqXHR, textStatus, errorMessage) {
+				   console.log(errorMessage); // Optional
+			   }
+			});
+		});
+		$("#uploadFileButton").on('click', function(evt){	 
+			evt.preventDefault();
+			var fd = new FormData();	
+			var file = $('#uploadFile')[0].files[0];
+			fd.append("fileToUpload",file);
+			$("#response").html("<img src='ajax-loader.gif'>");  
+			$.ajax({
+			   url: "uploadFile",
+			   type: "POST",
+			   data: fd,
+			   processData: false,
+			   contentType: false,
+			   success: function(response) {
+				   $("#response").html(response);
+				   setTimeout(function(){
+						$("#response").html("");
+				   }, 4000);
+			   },
+			   error: function(jqXHR, textStatus, errorMessage) {
+				   console.log(errorMessage); // Optional
+			   }
+			});
+		});
+		
+		$("#uploadSPIFFButton").on('click', function(evt){	 
+			evt.preventDefault();
+			var fd = new FormData();	
+			var file = $('#uploadSPIFF')[0].files[0];
+			fd.append("fileToUpload",file);
+			$("#response").html("<img src='ajax-loader.gif'>");  
+			$.ajax({
+			   url: "uploadSPIFF",
+			   type: "POST",
+			   data: fd,
+			   processData: false,
+			   contentType: false,
+			   success: function(response) {
+				   $("#response").html(response);
+				   setTimeout(function(){
+						$("#response").html("");
+				   }, 4000);
+			   },
+			   error: function(jqXHR, textStatus, errorMessage) {
+				   console.log(errorMessage); // Optional
+			   }
+			});
+		});
+
+		$('#rebootbutton').click(function(e)
+		{
+			e.preventDefault();
+			if (window.confirm("Are you sure?")) {
+				$.ajax({
+					url: "reboot",
+					type: 'GET',
+					dataType: "text",
+					success: function(response) {
+						$("#response2").html(response);
+						setTimeout(function(){
+								$("#response2").html("");
+						}, 4000);
+					}
+				});
+			}
+		});
+		$('#resetwifibutton').click(function(e)
+		{
+			e.preventDefault();
+			if (window.confirm("Are you sure?")) {
+				$.ajax({
+					url: "resetWifiConfig",
+					type: 'GET',
+					dataType: "text",
+					success: function(response) {
+						$("#response2").html(response);
+						setTimeout(function(){
+								$("#response2").html("");
+						}, 4000);
+					}
+				});
+			}
+		});
+		$('#resetconfigbutton').click(function(e)
+		{
+			e.preventDefault();
+			if (window.confirm("Are you sure?")) {
+				$.ajax({
+					url: "resetConfig",
+					type: 'GET',
+					dataType: "text",
+					success: function(response) {
+						$("#response2").html(response);
+						setTimeout(function(){
+								$("#response2").html("");
+						}, 4000);
+					}
+				});
+			}
+		});
+	</script>
+</body>
+</html>
+
+
+	
