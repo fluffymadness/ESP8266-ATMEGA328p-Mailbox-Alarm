@@ -42,7 +42,7 @@ The rest are standard parts that can also be sourced from aliexpress
 
 ## Screenshots showing the serial debug interface
 
-![Alt text](serialdebug.jpg?raw=true "Info")
+![Alt text](seriallog.jpg?raw=true "Info")
 
 # Already Implemented Functionality
 
