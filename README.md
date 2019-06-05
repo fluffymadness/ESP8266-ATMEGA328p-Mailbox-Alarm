@@ -2,7 +2,8 @@
 
 ## Introduction
 
-This project is WIP.
+This project is a WIP. The recommended parts, microcontrollers, types of battery etc could still change later on.
+
 The goal is to have a client and a server node for receiving status information
 from my physical mailbox outside.
 The server part of the project is running currently on a NodeMCUv3 board for testing.
@@ -17,6 +18,20 @@ When the the server realizes that the mailbox has been opened it should deliver 
 Also the status of the Info-Page on the webinterface should be updated accordingly.
 
 Resetting the actual state, e.g when the mail was fetched should then be possible via the webinterface, mqtt commands, or a simple button press on the server node.
+
+## Parts Overview
+
+Parts can be cheaply sourced from aliexpress. e.g
+
+ATMEGA328 module (get the 3.3v one) for the client 
+(https://www.aliexpress.com/item/1pcs-lot-Pro-Mini-Module-Atmega328-5V-16M-with-Arduino-Compatible-With-Nano/32672852945.html?spm=2114.search0104.3.1.4b313252EfP7qk&ws_ab_test=searchweb0_0,searchweb201602_6_10065_10068_10547_319_317_10548_10696_10084_453_10083_454_10618_10304_10307_10820_10821_537_10302_536_10059_10884_10887_321_322_10103,searchweb201603_52,ppcSwitch_0&algo_expid=28464f61-92ab-41cf-9391-0c138483a240-0&algo_pvid=28464f61-92ab-41cf-9391-0c138483a240&transAbTest=ae803_3)
+
+NodeMCU board for the server(
+https://www.aliexpress.com/item/V2-4M-4FLASH-NodeMcu-Lua-WIFI-Networking-development-board-Based-ESP8266/32647690484.html?spm=2114.search0104.3.3.6c445c45bPX0AV&ws_ab_test=searchweb0_0,searchweb201602_6_10065_10068_10547_319_317_10548_10696_10084_453_10083_454_10618_10304_10307_10820_10821_537_10302_536_10059_10884_10887_321_322_10103,searchweb201603_52,ppcSwitch_0&algo_expid=ca9ed334-9f93-40da-b08b-114a98e12ee5-0&algo_pvid=ca9ed334-9f93-40da-b08b-114a98e12ee5&transAbTest=ae803_3)
+
+The rest are standard parts that can also be sourced from aliexpress
+- Magnetic Reed Switch (still have to look what to get, Normally-Opened or Normally-Closed in terms of powermanagement for the microcontroller)
+- LED
 
 ## Screenshots of the Webinterface
 
