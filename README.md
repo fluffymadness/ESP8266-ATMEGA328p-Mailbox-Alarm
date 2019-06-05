@@ -18,7 +18,11 @@ Also the webinterface should be updated accordingly.
 
 Resetting the state, e.g when the mail was fetched should then be possible via webinterface, mqtt commands, or a simple button press on the server node.
 
-## Already Implemented Functionality
+## Screenshots
+
+
+
+# Already Implemented Functionality
 
 ## Server
 
@@ -40,7 +44,7 @@ Resetting the state, e.g when the mail was fetched should then be possible via w
 - Editable Config via Webinterface (Hostname, MQTT-Broker-Ip, MQTT-broker-Port, MQTT-Topic, Domoticz Settings for Virtual Device IDX And custom Domoticz GET Url)
 - Info Page for inspecting Logs of the device and seeing Hardware Overview Like Ip Address, Mac Address etc of the device
 
-## Todo 
+# Todo 
 
 ## Server
 - Implementing a fix for the slow and unresponsive webinterface when mqtt is enabled and the broker is not found
