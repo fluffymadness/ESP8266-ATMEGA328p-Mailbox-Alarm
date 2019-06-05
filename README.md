@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is one of my work-in-progress personal projects.
+This project is WIP.
 The goal is to have a client and a server node for sending and receiving status information
 of my physical mailbox outside.
 
