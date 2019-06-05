@@ -20,7 +20,7 @@ Resetting the state, e.g when the mail was fetched should then be possible via w
 
 ## Screenshots
 
-![Alt text](img.jpg?raw=true "Title")
+![Alt text](info.jpg?raw=true "Title")
 
 # Already Implemented Functionality
 
