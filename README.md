@@ -18,9 +18,12 @@ Also the webinterface should be updated accordingly.
 
 Resetting the state, e.g when the mail was fetched should then be possible via webinterface, mqtt commands, or a simple button press on the server node.
 
-## Screenshots
+## Screenshots of the Webinterface
 
-![Alt text](info.jpg?raw=true "Title")
+![Alt text](status.jpg?raw=true "Status")
+![Alt text](config.jpg?raw=true "Config")
+![Alt text](system.jpg?raw=true "System")
+![Alt text](info.jpg?raw=true "Info")
 
 # Already Implemented Functionality
 
