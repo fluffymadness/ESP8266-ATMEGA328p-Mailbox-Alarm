@@ -58,6 +58,7 @@ The rest are standard parts that can also be sourced from aliexpress
 ### Webinterface
 
 - Complete webinterface realized via Bootstrap
+- Settings are read and Set via ajax and JSON
 - Status page to see if the mailbox is empty or full realized via pictures and text.
 - Firmware can be upgraded via webinterface
 - Single files of the webinterface can be changed via form upload
