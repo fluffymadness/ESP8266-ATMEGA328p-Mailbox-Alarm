@@ -123,7 +123,7 @@ void initWebserver(){
       });
 
       mc->registerOnSpiffsUpdateCallback([](){});
-      mc->registerOnRebootCallbackFunction([](){
+      mc->registerOnRebootCallback([](){
         restartMcu();
       });
       mc->registerOnConfigResetCallback([](){

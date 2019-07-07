@@ -10,25 +10,16 @@
 
 class MailCubeWebServer{
     private:
-        typedef std::function<bool(void)> readDeviceStateFunction;
-        typedef std::function<void(bool)> switchDeviceStateFunction;
-        typedef std::function<void(void)> restartFunction;
-        typedef std::function<void(void)> restartFunctionSPIFF;
-        typedef std::function<void(void)> onSettingsChange;
-        typedef std::function<void(void)> onConfigResetFunction;
-        typedef std::function<void(void)> onRebootFunction;
-        typedef std::function<void(void)> onWifiConfigResetFunction;
         
         ESP8266WebServer server;
         ESP8266HTTPUpdateServer httpUpdater;
-        readDeviceStateFunction mcb;
-        switchDeviceStateFunction sdsf;
-        restartFunction rfcb;
-        restartFunctionSPIFF spiffcb;
-        onSettingsChange oscf;
-        onConfigResetFunction ocrf;
-        onRebootFunction onrf;
-        onWifiConfigResetFunction owcrf;
+        std::function<bool(void)> ReadDeviceStateCallback;
+        std::function<void(bool)> SwitchDeviceStateCallback;
+        std::function<void(void)> OnSpiffsUpdateCallback;
+        std::function<void(void)> OnRebootCallback;
+        std::function<void(void)> OnSettingsChangedCallback;
+        std::function<void(void)> onConfigResetCallback;
+        std::function<void(void)> OnWifiConfigResetCallback;
         String _temp; 
         String hardwareInfo();
         Settings *_settings; 
@@ -38,13 +29,13 @@ class MailCubeWebServer{
         void begin();
         String getContentType(String);
         bool handleFileRead(String path);
-        void registerReadDeviceStateCallback(readDeviceStateFunction function);
-        void registerSwitchDeviceStateCallback(switchDeviceStateFunction function);
-        void registerOnSpiffsUpdateCallback(restartFunctionSPIFF function);
-        void registerOnRebootCallbackFunction(onConfigResetFunction function);
-        void registerOnSettingsChangedCallback(onSettingsChange function);
-        void registerOnConfigResetCallback(onConfigResetFunction function);
-        void registerOnWifiConfigResetCallback(onWifiConfigResetFunction function);
+        void registerReadDeviceStateCallback(std::function<bool(void)>);
+        void registerSwitchDeviceStateCallback(std::function<void(bool)>);
+        void registerOnSpiffsUpdateCallback(std::function<void(void)>);
+        void registerOnRebootCallback(std::function<void(void)>);
+        void registerOnSettingsChangedCallback(std::function<void(void)>);
+        void registerOnConfigResetCallback(std::function<void(void)>);
+        void registerOnWifiConfigResetCallback(std::function<void(void)>);
         void handleClient();
     
 };

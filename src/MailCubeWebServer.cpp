@@ -23,7 +23,7 @@ void MailCubeWebServer::begin(){
     if(_settings->setSettings(root)){
       _syslog->addMessage("Config saved..Device is Rebooting");
       server.send(200, "text/plain", "Config saved..Device is Rebooting");
-      oscf();
+      OnSettingsChangedCallback();
     }
     else{
       _syslog->addMessage("Config-Saving error");
@@ -42,17 +42,17 @@ void MailCubeWebServer::begin(){
   });
   server.on("/reboot", HTTP_GET, [this](){
       server.send(200, "text/plain", "System Rebooting");
-      onrf();
+      OnRebootCallback();
   });
   server.on("/resetConfig", HTTP_GET, [this](){
       _syslog->addMessage("Resetting Config, the System restarts now");
       server.send(200, "text/plain", "Resetting Config, the System restarts now");
-      ocrf();
+      onConfigResetCallback();
   });
   server.on("/resetWifiConfig", HTTP_GET, [this](){
        _syslog->addMessage("Resetting Wifi Config, the System restarts now");
       server.send(200, "text/plain", "Resetting Wifi Config, the System restarts now");
-      owcrf();
+      OnWifiConfigResetCallback();
   });
   server.on("/getConfig", HTTP_GET, [this](){
       String json;
@@ -87,22 +87,22 @@ void MailCubeWebServer::begin(){
   httpUpdater.setup(&server, "/update");  
   server.begin();
 }
-void MailCubeWebServer::registerOnRebootCallbackFunction(onRebootFunction function){
-    onrf=function;
+void MailCubeWebServer::registerOnRebootCallback(std::function<void(void)> function){
+    OnRebootCallback=function;
 }
-void MailCubeWebServer::registerOnSettingsChangedCallback(onSettingsChange function){
-    oscf=function;
+void MailCubeWebServer::registerOnSettingsChangedCallback(std::function<void(void)> function){
+    OnSettingsChangedCallback=function;
 }
-void MailCubeWebServer::registerOnConfigResetCallback(onConfigResetFunction function){
-    ocrf=function;
+void MailCubeWebServer::registerOnConfigResetCallback(std::function<void(void)> function){
+    onConfigResetCallback=function;
 }
-void MailCubeWebServer::registerOnWifiConfigResetCallback(onWifiConfigResetFunction function){
-    owcrf=function;
+void MailCubeWebServer::registerOnWifiConfigResetCallback(std::function<void(void)> function){
+    OnWifiConfigResetCallback=function;
 }
 
 
-void MailCubeWebServer::registerOnSpiffsUpdateCallback(restartFunctionSPIFF function){
-    spiffcb = function;
+void MailCubeWebServer::registerOnSpiffsUpdateCallback(std::function<void(void)> function){
+    OnSpiffsUpdateCallback = function;
     server.on("/uploadSPIFF", HTTP_POST, [this](){
       server.send(200, "text/plain", "File uploaded");
     },[this](){
@@ -148,21 +148,22 @@ void MailCubeWebServer::registerOnSpiffsUpdateCallback(restartFunctionSPIFF func
     yield();
     });
 }
-void MailCubeWebServer::registerReadDeviceStateCallback(readDeviceStateFunction function){
-      server.on("/readMailState",HTTP_GET, [this](){
-          if(mcb()){
+void MailCubeWebServer::registerReadDeviceStateCallback(std::function<bool(void)> function){
+    this->ReadDeviceStateCallback= function;
+    server.on("/readMailState",HTTP_GET, [this](){
+          if(ReadDeviceStateCallback()){
             server.send(200, "text/plane", "1");
           }
           else{
             server.send(200, "text/plane", "0");
           }   
      });
-     this->mcb= function;
+     
 }
-void MailCubeWebServer::registerSwitchDeviceStateCallback(switchDeviceStateFunction function){
-    sdsf=function;
+void MailCubeWebServer::registerSwitchDeviceStateCallback(std::function<void(bool)> function){
+    SwitchDeviceStateCallback=function;
     server.on("/removeNotification",HTTP_GET, [this](){
-        sdsf(false);
+        SwitchDeviceStateCallback(false);
         _syslog->addMessage("Removed Notification");
         server.send(200, "text/plane", "1");
     });
